@@ -8,6 +8,21 @@
         <h:outputStylesheet library="css" name="styleLogin.css"/>
     </h:head>
     <h:body>
-        Inicio de sesión
+        <h:form id="loginForm">
+            <p:panel header="Login" styleClass="login-panel">
+                <h:messages id="messages" styleClass="error-messages" />
+                
+                <h:outputLabel for="correo" value="Correo: " />
+                <p:inputText id="correo" value="#{loginController.correo}" required="true" label="Correo" />
+                
+                <h:outputLabel for="contraseña" value="Contraseña: " />
+                <p:password id="contraseña" value="#{loginController.contraseña}" required="true" label="Contraseña" />
+                
+                <h:outputLabel for="empleado" value="Número de Empleado: " />
+                <p:inputText id="empleado" value="#{loginController.empleado}" required="true" label="Número de Empleado" />
+                
+                <p:commandButton value="Entrar" action="#{loginController.ingresar()}" update="messages" />
+            </p:panel>
+        </h:form>
     </h:body>
 </html>
