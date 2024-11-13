@@ -5,8 +5,38 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Inicio - FERREBOB</title>
+        <h:outputStylesheet library="css" name="styleIndex.css"/>
     </h:head>
     <h:body>
-        Inicio
-    </h:body>
+        <h:form>
+            <div class="layout-container">
+                <div class="menu-lateral">
+                    <p:menu style="width: 250px; border-radius: 0px">
+                        <p:menuitem value="Inicio" url="#"/>
+                        <p:menuitem value="Productos" url="productos.xhtml"/>
+                        <p:menuitem value="Revisión" url="revision.xhtml"/>
+                        <p:menuitem value="Pro. Nuevos" url="productosNuevos.xhtml"/>
+                        <p:menuitem value="Empleados" url="empleados.xhtml"/>
+                        <p:menuitem value="Recibos" url="recibo.xhtml"/>
+                    </p:menu>
+                </div>
+                <div class="contenido-central">
+                    <div class="opciones-central">
+                        <div class="opcion-cuadro">
+                            <p:linkButton value="Productos" styleClass="btn-cuadro" icon="pi pi-box" outcome="productos.xhtml" />
+                        </div>
+                        <div class="opcion-cuadro">
+                            <p:linkButton value="Revisión" styleClass="btn-cuadro" icon="pi pi-search" outcome="revision.xhtml" />
+                        </div>
+                        <div class="opcion-cuadro">
+                            <p:linkButton value="Pro. Nuevos" styleClass="btn-cuadro" icon="pi pi-plus" outcome="productosNuevos.xhtml" />
+                        </div>
+                        <div class="opcion-cuadro">
+                            <p:linkButton value="Recibos" styleClass="btn-cuadro" icon="pi pi-credit-card" outcome="recibo.xhtml" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:form>
+</h:body>
 </html>

@@ -7,21 +7,26 @@
         <title>Inicio de sesión - FERREBOB</title>
         <h:outputStylesheet library="css" name="styleLogin.css"/>
     </h:head>
-    <h:body>
-        <h:form id="loginForm">
-            <p:panel header="Login" styleClass="login-panel">
-                <h:messages id="messages" styleClass="error-messages" />
+<h:body>
+    <h:form class="loginForm">
+            <p:panel header="Inicio de sesión" styleClass="loginPanel">
                 
                 <h:outputLabel for="correo" value="Correo: " />
-                <p:inputText id="correo" value="#{loginController.correo}" required="true" label="Correo" />
+                <p:inputText style="margin-bottom: 20px"
+                    id="correo" value="#{loginController.correo}" required="true" label="Correo" styleClass="inputField" />
+                <br></br>
                 
                 <h:outputLabel for="contraseña" value="Contraseña: " />
-                <p:password id="contraseña" value="#{loginController.contraseña}" required="true" label="Contraseña" />
+                <p:password style="margin-bottom: 20px"
+                    id="contraseña" value="#{loginController.contraseña}" required="true" label="Contraseña" styleClass="inputField" />
+                <br></br>
                 
-                <h:outputLabel for="empleado" value="Número de Empleado: " />
-                <p:inputText id="empleado" value="#{loginController.empleado}" required="true" label="Número de Empleado" />
+                <h:outputLabel for="empleado" value="Código de empleado: " />
+                <p:inputText style="margin-bottom: 20px"
+                    id="empleado" value="#{loginController.codigo}" required="true" label="Código de empleado" styleClass="inputField" />
+                <br></br>
                 
-                <p:commandButton value="Entrar" action="#{loginController.ingresar()}" update="messages" />
+                <p:commandButton value="Entrar" action="#{loginController.ingresar()}" styleClass="submitButton" />
             </p:panel>
         </h:form>
     </h:body>
