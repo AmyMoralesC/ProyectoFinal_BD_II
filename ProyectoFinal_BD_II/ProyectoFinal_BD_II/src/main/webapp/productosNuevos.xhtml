@@ -5,8 +5,57 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Ingreso - FERREBOB</title>
+        <h:outputStylesheet library="css" name="styleProductosNuevos.css"/>
     </h:head>
     <h:body>
-        Ingreso de productos nuevos
+        <h:form>
+            <div class="layout-container">
+
+                <div class="menu-lateral">
+                    <h2>Ferre Bob</h2>
+                    <p:menu style="width: 250px; border-radius: 0px">
+                        <p:menuitem value="Inicio" url="index.xhtml"/>
+                        <p:menuitem value="Productos" url="productos.xhtml"/>
+                        <p:menuitem value="Revisión" url="revision.xhtml"/>
+                        <p:menuitem value="Pro. Nuevos" url="productosNuevos.xhtml"/>
+                        <p:menuitem value="Empleados" url="empleados.xhtml"/>
+                        <p:menuitem value="Recibos" url="recibo.xhtml"/>
+                    </p:menu>
+                </div>
+                
+                <div class="contenido-central">
+                    <div class="form-producto-nuevo">
+                        <h1>Agregar Producto Nuevo</h1>
+                        <h:panelGrid columns="2" cellpadding="10">
+                            <h:outputLabel for="codigo" value="Código:" styleClass="label-column"/>
+                            <h:inputText id="codigo" styleClass="input-column"/>
+
+                            <h:outputLabel for="nombre" value="Nombre:" styleClass="label-column"/>
+                            <h:inputText id="nombre" styleClass="input-column"/>
+
+                            <h:outputLabel for="modelo" value="Modelo:" styleClass="label-column"/>
+                            <h:inputText id="modelo" styleClass="input-column"/>
+
+                            <h:outputLabel for="anio" value="Año:" styleClass="label-column"/>
+                            <h:inputText id="anio" styleClass="input-column"/>
+
+                            <h:outputLabel for="cantidad" value="Cantidad:" styleClass="label-column"/>
+                            <h:inputText id="cantidad" styleClass="input-column"/>
+
+                            <h:outputLabel for="fabrica" value="Nombre de la fábrica:" styleClass="label-column"/>
+                            <h:inputText id="fabrica" styleClass="input-column"/>
+
+                            <h:outputLabel for="precio" value="Precio:" styleClass="label-column"/>
+                            <h:inputText id="precio" styleClass="input-column"/>
+                        </h:panelGrid>
+
+                        <div class="acciones-producto">
+                            <p:commandButton value="Agregar" styleClass="btn-accion"/>
+                            <p:commandButton value="Limpiar" styleClass="btn-accion"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
     </h:body>
 </html>

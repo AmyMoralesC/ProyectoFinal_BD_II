@@ -13,20 +13,20 @@
                 
                 <h:outputLabel for="correo" value="Correo: " />
                 <p:inputText style="margin-bottom: 20px"
-                    id="correo" value="#{loginController.correo}" required="true" label="Correo" styleClass="inputField" />
+                    id="correo" value="" required="true" label="Correo" styleClass="inputField" />
                 <br></br>
                 
                 <h:outputLabel for="contraseña" value="Contraseña: " />
                 <p:password style="margin-bottom: 20px"
-                    id="contraseña" value="#{loginController.contraseña}" required="true" label="Contraseña" styleClass="inputField" />
+                    id="contraseña" value="" required="true" label="Contraseña" styleClass="inputField" />
                 <br></br>
                 
                 <h:outputLabel for="empleado" value="Código de empleado: " />
                 <p:inputText style="margin-bottom: 20px"
-                    id="empleado" value="#{loginController.codigo}" required="true" label="Código de empleado" styleClass="inputField" />
+                    id="empleado" value="" required="true" label="Código de empleado" styleClass="inputField" />
                 <br></br>
                 
-                <p:commandButton value="Entrar" action="#{loginController.ingresar()}" styleClass="submitButton" />
+                <p:linkButton value="Entrar" outcome="index.xhtml" styleClass="submitButton" />
             </p:panel>
         </h:form>
     </h:body>

@@ -10,8 +10,10 @@
     <h:body>
         <h:form>
             <div class="layout-container">
+
                 <div class="menu-lateral">
-                    <p:menu style="width: 250px; border-radius: 0px">
+                    <h2>Ferre Bob</h2>
+                    <p:menu style="width: 100%; border-radius: 0px">
                         <p:menuitem value="Inicio" url="#"/>
                         <p:menuitem value="Productos" url="productos.xhtml"/>
                         <p:menuitem value="Revisión" url="revision.xhtml"/>
@@ -20,7 +22,17 @@
                         <p:menuitem value="Recibos" url="recibo.xhtml"/>
                     </p:menu>
                 </div>
+
                 <div class="contenido-central">
+                    <div class="usuario-opciones">
+                        <p:menubar>
+                            <p:submenu label="Empleado" icon="pi pi-user">
+                                <p:menuitem value="Cerrar sesión" url="login.xhtml"/>
+                                <p:menuitem value="Cambiar contraseña" onclick="PF('dlgCambiarContra').show();" />
+                            </p:submenu>
+                        </p:menubar>
+                    </div>
+
                     <div class="opciones-central">
                         <div class="opcion-cuadro">
                             <p:linkButton value="Productos" styleClass="btn-cuadro" icon="pi pi-box" outcome="productos.xhtml" />
@@ -33,10 +45,22 @@
                         </div>
                         <div class="opcion-cuadro">
                             <p:linkButton value="Recibos" styleClass="btn-cuadro" icon="pi pi-credit-card" outcome="recibo.xhtml" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </h:form>
-</h:body>
+
+            <p:dialog header="Cambiar Contraseña" widgetVar="dlgCambiarContra" modal="true" width="400">
+                <h:panelGrid columns="1" style="margin: 0 auto;">
+                    <h:outputLabel value="Correo:" />
+                    <p:inputText />
+                    <h:outputLabel value="Código:" />
+                    <p:inputText />
+                    <h:outputLabel value="Nueva Contraseña:" />
+                    <p:password />
+                    <p:commandButton value="Cambiar" icon="pi pi-check" styleClass="btn-cambiar"/>
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+    </h:body>
 </html>

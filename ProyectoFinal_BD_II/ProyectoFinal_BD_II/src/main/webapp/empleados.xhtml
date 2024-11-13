@@ -2,11 +2,77 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Empleados - FERREBOB</title>
+        <h:outputStylesheet library="css" name="styleEmpleados.css"/>
     </h:head>
     <h:body>
-        Empleados - FERREBOB
+         <h:form>
+            <div class="layout-container">
+
+                <div class="menu-lateral">
+                     <h2>Ferre Bob</h2>
+                    <p:menu style="width: 250px; border-radius: 0px">
+                        <p:menuitem value="Inicio" url="index.xhtml"/>
+                        <p:menuitem value="Productos" url="productos.xhtml"/>
+                        <p:menuitem value="Revisión" url="revision.xhtml"/>
+                        <p:menuitem value="Pro. Nuevos" url="productosNuevos.xhtml"/>
+                        <p:menuitem value="Empleados" url="empleados.xhtml"/>
+                        <p:menuitem value="Recibos" url="recibo.xhtml"/>
+                    </p:menu>
+                </div>
+
+                <div class="contenido-central">
+                    <p:panel header="Empleados">
+
+                        <p:commandButton value="Crear nuevo Empl" onclick="PF('dlgAgregarEmpleado').show();" styleClass="btn-cuadro" />
+
+                        <p:dataTable id="tablaEmpleados" value="#{empleadoBean.empleados}" var="empleado" editable="true">
+                            <p:column headerText="Código">
+                                <h:outputText value="#{empleado.codigo}" />
+                            </p:column>
+                            <p:column headerText="Nombre">
+                                <h:outputText value="#{empleado.nombre}" />
+                            </p:column>
+                            <p:column headerText="Número de teléfono">
+                                <h:outputText value="#{empleado.telefono}" />
+                            </p:column>
+                            <p:column headerText="Correo">
+                                <h:outputText value="#{empleado.correo}" />
+                            </p:column>
+                            <p:column headerText="Acción">
+                                <p:commandButton value="Editar" actionListener="#{empleadoBean.editarEmpleado(empleado)}" title="Editar" styleClass="btn-editar"/>
+                                <p:commandButton value="Borrar" actionListener="#{empleadoBean.eliminarEmpleado(empleado)}" update="tablaEmpleados" title="Borrar" styleClass="btn-borrar"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </div>
+            </div>
+
+            <p:dialog header="Agregar Empleado" widgetVar="dlgAgregarEmpleado" modal="true" width="400px" closable="true">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="codigo" value="Código:" />
+                    <p:inputText id="codigo" value="#{empleadoBean.nuevoEmpleado.codigo}" required="true"/>
+
+                    <h:outputLabel for="nombre" value="Nombre:" />
+                    <p:inputText id="nombre" value="#{empleadoBean.nuevoEmpleado.nombre}" required="true"/>
+
+                    <h:outputLabel for="telefono" value="Número de teléfono:" />
+                    <p:inputText id="telefono" value="#{empleadoBean.nuevoEmpleado.telefono}" required="true"/>
+
+                    <h:outputLabel for="correo" value="Correo:" />
+                    <p:inputText id="correo" value="#{empleadoBean.nuevoEmpleado.correo}" required="true"/>
+
+                    <h:outputLabel for="cargo" value="Cargo:" />
+                    <p:inputText id="cargo" value="#{empleadoBean.nuevoEmpleado.cargo}" required="true"/>
+                </h:panelGrid>
+                <f:facet name="footer">
+                    <p:commandButton value="Crear" actionListener="#{empleadoBean.crearEmpleado}" update="tablaEmpleados" oncomplete="PF('dlgAgregarEmpleado').hide();" styleClass="btn-cuadro"/>
+                    <p:commandButton value="Cancelar" onclick="PF('dlgAgregarEmpleado').hide();" styleClass="btn-borrar"/>
+                </f:facet>
+            </p:dialog>
+        </h:form>
     </h:body>
 </html>

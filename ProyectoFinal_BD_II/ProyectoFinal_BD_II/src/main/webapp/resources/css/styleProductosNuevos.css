@@ -7,3 +7,114 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : Amy
 */
 
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f2f2f2;
+    height: 100vh;
+    margin: 0;
+}
+
+.layout-container {
+    display: flex;
+    height: 100vh;
+}
+
+.menu-lateral {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.menu-lateral h2 {
+    margin: 20px 0;
+    font-size: 24px;
+    color: #ecf0f1;
+    font-weight: bold;
+}
+
+.contenido-central {
+    flex-grow: 1;
+    background-color: #ecf0f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.form-producto-nuevo {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 600px;
+    display: grid;
+    gap: 15px;
+}
+
+.form-producto-nuevo h1 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.label-column {
+    font-weight: bold;
+    text-align: right;
+    padding-right: 10px;
+    color: #34495e;
+}
+
+.input-column {
+    text-align: left;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.acciones-producto {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.btn-accion {
+    background-color: #3498db;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-weight: bold;
+}
+
+.btn-accion:hover {
+    background-color: #2980b9;
+}
+
+@media (max-width: 768px) {
+    .layout-container {
+        flex-direction: column;
+    }
+
+    .menu-lateral {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .form-producto-nuevo {
+        width: 100%;
+        padding: 20px;
+    }
+}
+

@@ -5,8 +5,58 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Productos - FERREBOB</title>
+        <h:outputStylesheet library="css" name="styleProductos.css"/>
     </h:head>
     <h:body>
-        Productos
+        <h:form>
+            <div class="layout-container">
+
+                <div class="menu-lateral">
+                    <h2>Ferre Bob</h2>
+                    <p:menu style="width: 250px; border-radius: 0px">
+                        <p:menuitem value="Inicio" url="index.xhtml"/>
+                        <p:menuitem value="Productos" url="productos.xhtml"/>
+                        <p:menuitem value="Revisión" url="revision.xhtml"/>
+                        <p:menuitem value="Pro. Nuevos" url="productosNuevos.xhtml"/>
+                        <p:menuitem value="Empleados" url="empleados.xhtml"/>
+                        <p:menuitem value="Recibos" url="recibo.xhtml"/>
+                    </p:menu>
+                </div>
+
+                <div class="contenido-central">
+                    <p:panel header="Inventario">
+                        <p:commandButton value="Agregar" actionListener="#{inventarioBean.agregarProducto}" update="tabla" styleClass="btn-cuadro" />
+
+                        <p:dataTable id="tabla" value="#{inventarioBean.productos}" var="producto" editable="true">
+                            <p:column headerText="Código">
+                                <h:outputText value="#{producto.codigo}" />
+                            </p:column>
+                            <p:column headerText="Nombre">
+                                <h:outputText value="#{producto.nombre}" />
+                            </p:column>
+                            <p:column headerText="Modelo">
+                                <h:outputText value="#{producto.modelo}" />
+                            </p:column>
+                            <p:column headerText="Año">
+                                <h:outputText value="#{producto.año}" />
+                            </p:column>
+                            <p:column headerText="Cantidad">
+                                <h:outputText value="#{producto.cantidad}" />
+                            </p:column>
+                            <p:column headerText="Nombre de la Fábrica">
+                                <h:outputText value="#{producto.nombreFabricante}" />
+                            </p:column>
+                            <p:column headerText="Precio">
+                                <h:outputText value="#{producto.precio}" />
+                            </p:column>
+                            <p:column headerText="Acción">
+                                <p:commandButton value="Editar" actionListener="#{inventarioBean.editarProducto(producto)}" title="Editar" styleClass="btn-editar"/>
+                                <p:commandButton value="Borrar" actionListener="#{inventarioBean.eliminarProducto(producto)}" update="tabla" title="Borrar" styleClass="btn-borrar"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+                </div>
+            </div>
+        </h:form>
     </h:body>
 </html>
