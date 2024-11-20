@@ -3,15 +3,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : 5 nov 2024, 6:23:14 p.m.
+    Created on : 5 nov 2024, 6:23:58 p.m.
     Author     : Amy
 */
 
-body {
+body, html {
     font-family: 'Arial', sans-serif;
     background-color: #f2f2f2;
     height: 100vh;
     margin: 0;
+    padding: 0;
 }
 
 .layout-container {
@@ -40,23 +41,28 @@ body {
     text-align: center;
 }
 
+.menu-lateral .ui-menuitem-link {
+    color: white !important;
+}
+
+.menu-lateral .ui-menuitem {
+    border: none;
+}
+
+.menu-lateral .ui-menuitem-text {
+    font-size: 1em;
+}
+
 .contenido-central {
     margin-left: 250px;
     padding: 20px;
     flex-grow: 1;
     background-color: #ecf0f1;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     overflow-y: auto;
     box-sizing: border-box;
-}
-
-.opciones-central {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    justify-items: center;
 }
 
 .ui-panel {
@@ -81,7 +87,6 @@ body {
     padding: 8px 16px;
     font-size: 1em;
     margin-bottom: 20px;
-    bottom: 8px;
 }
 
 .btn-cuadro:hover {
@@ -130,6 +135,24 @@ body {
     background-color: #e55341;
 }
 
+.ui-dialog {
+    width: 400px;
+}
+
+.ui-dialog-titlebar {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.ui-dialog-content {
+    padding: 20px;
+    font-size: 1em;
+}
+
+.ui-button-text-only .ui-button-text {
+    color: white;
+}
+
 @media (max-width: 768px) {
     .layout-container {
         flex-direction: column;
@@ -145,8 +168,5 @@ body {
         margin-left: 0;
         padding: 10px;
     }
-
-    .opciones-central {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
 }
+

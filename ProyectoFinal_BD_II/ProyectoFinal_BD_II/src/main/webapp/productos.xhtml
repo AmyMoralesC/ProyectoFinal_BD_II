@@ -2,32 +2,33 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Productos - FERREBOB</title>
         <h:outputStylesheet library="css" name="styleProductos.css"/>
     </h:head>
     <h:body>
-        <h:form>
+         <h:form>
             <div class="layout-container">
 
                 <div class="menu-lateral">
-                    <h2>Ferre Bob</h2>
+                     <h2>Ferre Bob</h2>
                     <p:menu style="width: 250px; border-radius: 0px">
                         <p:menuitem value="Inicio" url="index.xhtml"/>
                         <p:menuitem value="Productos" url="productos.xhtml"/>
                         <p:menuitem value="Revisión" url="revision.xhtml"/>
-                        <p:menuitem value="Pro. Nuevos" url="productosNuevos.xhtml"/>
                         <p:menuitem value="Empleados" url="empleados.xhtml"/>
                         <p:menuitem value="Recibos" url="recibo.xhtml"/>
                     </p:menu>
                 </div>
 
                 <div class="contenido-central">
-                    <p:panel header="Inventario">
-                        <p:commandButton value="Agregar" actionListener="#{inventarioBean.agregarProducto}" update="tabla" styleClass="btn-cuadro" />
+                    <p:panel header="Agregar productos">
 
-                        <p:dataTable id="tabla" value="#{inventarioBean.productos}" var="producto" editable="true">
+                        <p:commandButton value="Agregar producto" onclick="PF('dlgAgregarProducto').show();" styleClass="btn-cuadro" />
+
+                        <p:dataTable id="tablaProductos" value="#{productoBean.productos}" var="producto" editable="true">
                             <p:column headerText="Código">
                                 <h:outputText value="#{producto.codigo}" />
                             </p:column>
@@ -38,25 +39,54 @@
                                 <h:outputText value="#{producto.modelo}" />
                             </p:column>
                             <p:column headerText="Año">
-                                <h:outputText value="#{producto.año}" />
+                                <h:outputText value="#{producto.anio}" />
                             </p:column>
                             <p:column headerText="Cantidad">
                                 <h:outputText value="#{producto.cantidad}" />
                             </p:column>
-                            <p:column headerText="Nombre de la Fábrica">
-                                <h:outputText value="#{producto.nombreFabricante}" />
+                            <p:column headerText="Nombre de la fábrica">
+                                <h:outputText value="#{producto.nomFab}" />
                             </p:column>
                             <p:column headerText="Precio">
                                 <h:outputText value="#{producto.precio}" />
                             </p:column>
                             <p:column headerText="Acción">
-                                <p:commandButton value="Editar" actionListener="#{inventarioBean.editarProducto(producto)}" title="Editar" styleClass="btn-editar"/>
-                                <p:commandButton value="Borrar" actionListener="#{inventarioBean.eliminarProducto(producto)}" update="tabla" title="Borrar" styleClass="btn-borrar"/>
+                                <p:commandButton value="Editar" actionListener="#{productoBean.editarProducto(producto)}" title="Editar" styleClass="btn-editar"/>
+                                <p:commandButton value="Borrar" actionListener="#{productoBean.eliminarProducto(producto)}" update="tablaProductos" title="Borrar" styleClass="btn-borrar"/>
                             </p:column>
                         </p:dataTable>
                     </p:panel>
                 </div>
             </div>
+
+            <p:dialog header="Agregar Producto" widgetVar="dlgAgregarProducto" modal="true" width="400px" closable="true">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="codigo" value="Código:" />
+                    <p:inputText id="codigo" value="#{productoBean.nuevoProducto.codigo}" required="true"/>
+
+                    <h:outputLabel for="nombre" value="Nombre:" />
+                    <p:inputText id="nombre" value="#{productoBean.nuevoProducto.nombre}" required="true"/>
+
+                    <h:outputLabel for="modelo" value="Modelo:" />
+                    <p:inputText id="modelo" value="#{productoBean.nuevoProducto.modelo}" required="true"/>
+                    
+                    <h:outputLabel for="anio" value="Año:" />
+                    <p:inputText id="anio" value="#{productoBean.nuevoProducto.anio}" required="true"/>
+                    
+                    <h:outputLabel for="cantidad" value="Cantidad:" />
+                    <p:inputText id="cantidad" value="#{productoBean.nuevoProducto.cantidad}" required="true"/>
+
+                    <h:outputLabel for="nomFab" value="Nombre de la fábrica:" />
+                    <p:inputText id="nomFab" value="#{productoBean.nuevoProducto.nomFab}" required="true"/>
+
+                    <h:outputLabel for="precio" value="Precio:" />
+                    <p:inputText id="precio" value="#{productoBean.nuevoProducto.precio}" required="true"/>
+                </h:panelGrid>
+                <f:facet name="footer">
+                    <p:commandButton value="Crear" actionListener="#{productoBean.crearProducto}" update="tablaProductos" oncomplete="PF('dlgAgregarProducto').hide();" styleClass="btn-cuadro"/>
+                    <p:commandButton value="Cancelar" onclick="PF('dlgAgregarProducto').hide();" styleClass="btn-borrar"/>
+                </f:facet>
+            </p:dialog>
         </h:form>
     </h:body>
 </html>
