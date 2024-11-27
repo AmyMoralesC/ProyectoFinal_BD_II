@@ -19,19 +19,20 @@ public class Servicio {
     
     protected Connection conexion = null;
     private String host = "localhost";
-    private String puerto = "3306";
-    private String sid = "FERREBOB";
-    private String usuario = "root";
-    private String clave = "***"; //Cambiar la clave para que funcione
+    private String puerto = "1433"; // Puerto por defecto para SQL Server
+    private String baseDatos = "FERRETERIA"; // Cambia por el nombre de tu base de datos
+    private String usuario = "jared"; // Cambia por tu usuario de SQL Server
+    private String clave = "1234"; // Cambia por tu contraseña de SQL Server
 
     public void conectar() throws ClassNotFoundException, SQLException {
-
-        Class.forName("com.mysql.cj.jdbc.Driver");
+        // Cargar el driver JDBC de SQL Server
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         
-        conexion = DriverManager.getConnection(
-                "jdbc:mysql://" + host + ":" + puerto + "/" + sid + /*"?autoReconnect=true"*/ "?serverTimezone=UTC",
-                usuario, clave);
+        // Construir la URL de conexión para SQL Server
+        String url = "jdbc:sqlserver://" + host + ":" + puerto + ";databaseName=" + baseDatos;
 
+        // Establecer la conexión
+        conexion = DriverManager.getConnection(url, usuario, clave);
     }
     
     public void cerrarStatement(PreparedStatement stmt) {
@@ -71,5 +72,4 @@ public class Servicio {
         this.conectar();
         return this.conexion;
     }
-    
 }

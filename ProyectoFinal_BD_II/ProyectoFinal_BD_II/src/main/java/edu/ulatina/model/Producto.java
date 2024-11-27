@@ -15,7 +15,6 @@ public class Producto implements Serializable {
     private int codigo;
     private String nombre;
     private String modelo;
-    private String imagen;
     private int ano;
     private int cantidad;
     private int numeroFabrica;
@@ -24,11 +23,10 @@ public class Producto implements Serializable {
     public Producto() {
     }
 
-    public Producto(int codigo, String nombre, String modelo, String imagen, int ano, int cantidad, int numeroFabrica, int precio) {
+    public Producto(int codigo, String nombre, String modelo, int ano, int cantidad, int numeroFabrica, int precio) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.modelo = modelo;
-        this.imagen = imagen;
         this.ano = ano;
         this.cantidad = cantidad;
         this.numeroFabrica = numeroFabrica;
@@ -57,14 +55,6 @@ public class Producto implements Serializable {
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
     }
 
     public int getAno() {

@@ -28,7 +28,8 @@
 
                         <p:commandButton value="Agregar producto" onclick="PF('dlgAgregarProducto').show();" styleClass="btn-cuadro" />
 
-                        <p:dataTable id="tablaProductos" value="#{productoBean.productos}" var="producto" editable="true">
+                        <p:dataTable id="tablaProductos" value="#{productosController.productos}" var="producto" editable="true"
+                                     selection="#{ProductosController.selectedProducto}"  rowKey="#{producto.codigo}">
                             <p:column headerText="Código">
                                 <h:outputText value="#{producto.codigo}" />
                             </p:column>
@@ -39,13 +40,13 @@
                                 <h:outputText value="#{producto.modelo}" />
                             </p:column>
                             <p:column headerText="Año">
-                                <h:outputText value="#{producto.anio}" />
+                                <h:outputText value="#{producto.ano}" />
                             </p:column>
                             <p:column headerText="Cantidad">
                                 <h:outputText value="#{producto.cantidad}" />
                             </p:column>
                             <p:column headerText="Nombre de la fábrica">
-                                <h:outputText value="#{producto.nomFab}" />
+                                <h:outputText value="#{producto.numeroFabrica}" />
                             </p:column>
                             <p:column headerText="Precio">
                                 <h:outputText value="#{producto.precio}" />
