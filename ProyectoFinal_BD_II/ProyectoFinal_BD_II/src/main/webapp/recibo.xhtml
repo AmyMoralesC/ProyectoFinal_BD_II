@@ -24,36 +24,25 @@
 
                 <div class="contenido-central">
                     <p:panel header="Recibos">
-                        <p:commandButton value="Crear PDF" actionListener="#{inventarioBean.agregarProducto}" update="tabla" styleClass="btn-cuadro" />
+                        <p:commandButton value="Crear PDF" actionListener="#{inventarioBean.agregarProducto}" update="tablarecibos" styleClass="btn-cuadro" />
 
-                        <p:dataTable id="tabla" value="#{inventarioBean.productos}" var="producto" editable="true">
+                        <p:dataTable id="tablarecibos" value="#{reciboController.recibos}" var="recibos" editable="true"
+                                     selection="#{RecibosController.selectedRecibo}"  rowKey="#{recibos.codigo}">
                             <p:column headerText="Código de Recibo">
-                                <h:outputText value="#{producto.codigo}" />
-                            </p:column>
-                            <p:column headerText="Código de Producto">
-                                <h:outputText value="#{producto.codigoPro}" />
-                            </p:column>
-                            <p:column headerText="Nombre">
-                                <h:outputText value="#{producto.nombre}" />
-                            </p:column>
-                            <p:column headerText="Modelo">
-                                <h:outputText value="#{producto.modelo}" />
-                            </p:column>
-                            <p:column headerText="Año">
-                                <h:outputText value="#{producto.año}" />
+                                <h:outputText value="#{recibos.codigo}" />
                             </p:column>
                             <p:column headerText="Cantidad">
-                                <h:outputText value="#{producto.cantidad}" />
+                                <h:outputText value="#{recibos.cantidad}" />
                             </p:column>
-                            <p:column headerText="Precio Total">
-                                <h:outputText value="#{producto.precio}" />
+                            <p:column headerText="Precio total">
+                                <h:outputText value="#{recibos.precioTotal}" />
                             </p:column>
-                            <p:column headerText="Encargado">
-                                <h:outputText value="#{producto.encargado}" />
+                            <p:column headerText="Codigo del producto">
+                                <h:outputText value="#{recibos.productoCodigo}" />
                             </p:column>
                             <p:column headerText="Acción">
                                 <p:commandButton value="Editar" actionListener="#{inventarioBean.editarProducto(producto)}" title="Editar" styleClass="btn-editar"/>
-                                <p:commandButton value="Borrar" actionListener="#{inventarioBean.eliminarProducto(producto)}" update="tabla" title="Borrar" styleClass="btn-borrar"/>
+                                <p:commandButton value="Borrar" actionListener="#{inventarioBean.eliminarProducto(producto)}" update="tablarecibos" title="Borrar" styleClass="btn-borrar"/>
                             </p:column>
                         </p:dataTable>
                     </p:panel>

@@ -21,8 +21,8 @@ public class Servicio {
     private String host = "localhost";
     private String puerto = "1433"; // Puerto por defecto para SQL Server
     private String baseDatos = "FERRETERIA"; // Cambia por el nombre de tu base de datos
-    private String usuario = "jared"; // Cambia por tu usuario de SQL Server
-    private String clave = "1234"; // Cambia por tu contraseña de SQL Server
+    private String usuario = "AdministradorLogin "; // Cambia por tu usuario de SQL Server
+    private String clave = "Si1234!"; // Cambia por tu contraseña de SQL Server
 
     public void conectar() throws ClassNotFoundException, SQLException {
         // Cargar el driver JDBC de SQL Server

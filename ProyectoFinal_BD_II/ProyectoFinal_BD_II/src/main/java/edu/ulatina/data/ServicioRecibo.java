@@ -4,23 +4,24 @@
  */
 package edu.ulatina.data;
 
-import edu.ulatina.model.Producto;
 import edu.ulatina.model.Recibo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 
 /**
  *
  * @author jared
  */
-public class ServicioRecibo extends Servicio{
-    
-    
-    
-     public boolean crearRecivo(Recibo recibo) {
+@ManagedBean(name = "servicioRecibo")
+@ApplicationScoped
+public class ServicioRecibo extends Servicio {
+
+    public boolean crearRecibo(Recibo recibo) {
         boolean exito = false;
         PreparedStatement stmt = null;
 
@@ -44,27 +45,32 @@ public class ServicioRecibo extends Servicio{
         return exito;
     }
 
-    public List<Producto> buscarTodosLosProductos() {
-        List<Producto> listaProducto = new ArrayList<>();
+    public List<Recibo> buscarTodosLosRecibos() {
+        List<Recibo> listaRecibo = new ArrayList<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
         try {
             conectar();
-            String sql = "SELECT codigo,cantidad, precioTotal, ProductoCodigo FROM FERRETERIA.dbo.Producto";
+            
+            String sql = "SELECT codigo, cantidad, precioTotal, ProductoCodigo FROM FERRETERIA.dbo.Recibo";
             stmt = getConexion().prepareStatement(sql);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 int codigo = rs.getInt("codigo");
                 int cantidad = rs.getInt("cantidad");
-                int precioTo = rs.getInt("precioTota");
-                int productoCo = rs.getInt("ProductoCodigo");
+                int precioTotal = rs.getInt("precioTotal"); 
+                int productoCodigo = rs.getInt("ProductoCodigo"); 
+
+                // Crear el objeto Recibo y agregarlo a la lista
                 Recibo recibo = new Recibo();
                 recibo.setCodigo(codigo);
                 recibo.setCantidad(cantidad);
-                recibo.setPrecioTotal(precioTo);
-                recibo.setProductoCodigo(productoCo);
+                recibo.setPrecioTotal(precioTotal);
+                recibo.setProductoCodigo(productoCodigo);
+
+                listaRecibo.add(recibo);
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -74,6 +80,6 @@ public class ServicioRecibo extends Servicio{
             desconectar();
         }
 
-        return listaProducto;
+        return listaRecibo;
     }
 }

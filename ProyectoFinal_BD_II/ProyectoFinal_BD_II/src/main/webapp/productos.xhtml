@@ -28,28 +28,28 @@
 
                         <p:commandButton value="Agregar producto" onclick="PF('dlgAgregarProducto').show();" styleClass="btn-cuadro" />
 
-                        <p:dataTable id="tablaProductos" value="#{productosController.productos}" var="producto" editable="true"
+                        <p:dataTable id="tablaProductos" value="#{productosController.productos}" var="productos" editable="true"
                                      selection="#{ProductosController.selectedProducto}"  rowKey="#{producto.codigo}">
                             <p:column headerText="Código">
-                                <h:outputText value="#{producto.codigo}" />
+                                <h:outputText value="#{productos.codigo}" />
                             </p:column>
                             <p:column headerText="Nombre">
-                                <h:outputText value="#{producto.nombre}" />
+                                <h:outputText value="#{productos.nombre}" />
                             </p:column>
                             <p:column headerText="Modelo">
-                                <h:outputText value="#{producto.modelo}" />
+                                <h:outputText value="#{productos.modelo}" />
                             </p:column>
                             <p:column headerText="Año">
-                                <h:outputText value="#{producto.ano}" />
+                                <h:outputText value="#{productos.ano}" />
                             </p:column>
                             <p:column headerText="Cantidad">
-                                <h:outputText value="#{producto.cantidad}" />
+                                <h:outputText value="#{productos.cantidad}" />
                             </p:column>
                             <p:column headerText="Nombre de la fábrica">
-                                <h:outputText value="#{producto.numeroFabrica}" />
+                                <h:outputText value="#{productos.numeroFabrica}" />
                             </p:column>
                             <p:column headerText="Precio">
-                                <h:outputText value="#{producto.precio}" />
+                                <h:outputText value="#{productos.precio}" />
                             </p:column>
                             <p:column headerText="Acción">
                                 <p:commandButton value="Editar" actionListener="#{productoBean.editarProducto(producto)}" title="Editar" styleClass="btn-editar"/>

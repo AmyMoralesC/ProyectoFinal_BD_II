@@ -4,8 +4,12 @@
  */
 package edu.ulatina.controller;
 
+import edu.ulatina.data.ServicioRecibo;
+import edu.ulatina.model.Recibo;
 import java.io.Serializable;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 /**
@@ -14,6 +18,50 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean(name = "reciboController")
 @SessionScoped
-public class ReciboController implements Serializable{
-    
+public class ReciboController implements Serializable {
+
+    @ManagedProperty(value = "#{servicioRecibo}")
+    private ServicioRecibo servicioRec;
+    private Recibo recibo;
+    private Recibo selectedRecibo;
+    private List<Recibo> recibos;
+
+    public void cargarRecibos() {
+        if (servicioRec != null) {
+            recibos = servicioRec.buscarTodosLosRecibos();
+        }
+    }
+
+    // Getter para productos, cargando si es necesario
+    public List<Recibo> getRecibos() {
+        if (recibos == null) {
+            cargarRecibos();
+        }
+        return recibos;
+    }
+
+    public ServicioRecibo getServicioRec() {
+        return servicioRec;
+    }
+
+    public void setServicioRec(ServicioRecibo servicioRec) {
+        this.servicioRec = servicioRec;
+    }
+
+    public Recibo getRecibo() {
+        return recibo;
+    }
+
+    public void setRecibo(Recibo recibo) {
+        this.recibo = recibo;
+    }
+
+    public Recibo getSelectedRecibo() {
+        return selectedRecibo;
+    }
+
+    public void setSelectedRecibo(Recibo selectedRecibo) {
+        this.selectedRecibo = selectedRecibo;
+    }
+
 }

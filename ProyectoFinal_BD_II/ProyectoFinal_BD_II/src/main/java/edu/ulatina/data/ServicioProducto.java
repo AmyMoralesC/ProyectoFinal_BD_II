@@ -63,7 +63,7 @@ public class ServicioProducto extends Servicio {
                 int codigo = rs.getInt("codigo");
                 String nombre = rs.getString("nombre");
                 String modelo = rs.getString("modelo");
-                int ano = rs.getInt("año");
+                int ano = rs.getInt("ano");
                 int cantidad = rs.getInt("cantidad");
                 int numeroFa = rs.getInt("n_fabrica");
                 int precio = rs.getInt("precio");
@@ -75,6 +75,8 @@ public class ServicioProducto extends Servicio {
                 producto.setCantidad(cantidad);
                 producto.setNumeroFabrica(numeroFa);
                 producto.setPrecio(precio);
+                
+                listaProducto.add(producto);
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
