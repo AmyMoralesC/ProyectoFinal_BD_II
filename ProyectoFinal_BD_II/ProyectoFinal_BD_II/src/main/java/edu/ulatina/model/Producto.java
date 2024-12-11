@@ -11,19 +11,19 @@ import java.io.Serializable;
  * @author jared
  */
 public class Producto implements Serializable {
-    
+
     private int codigo;
     private String nombre;
     private String modelo;
     private int ano;
     private int cantidad;
-    private int numeroFabrica;
+    private String numeroFabrica;
     private int precio;
 
     public Producto() {
     }
 
-    public Producto(int codigo, String nombre, String modelo, int ano, int cantidad, int numeroFabrica, int precio) {
+    public Producto(int codigo, String nombre, String modelo, int ano, int cantidad, String numeroFabrica, int precio) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.modelo = modelo;
@@ -73,11 +73,11 @@ public class Producto implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public int getNumeroFabrica() {
+    public String getNumeroFabrica() {
         return numeroFabrica;
     }
 
-    public void setNumeroFabrica(int numeroFabrica) {
+    public void setNumeroFabrica(String numeroFabrica) {
         this.numeroFabrica = numeroFabrica;
     }
 
@@ -88,7 +88,18 @@ public class Producto implements Serializable {
     public void setPrecio(int precio) {
         this.precio = precio;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Producto{"
+                + "codigo=" + codigo
+                + ", nombre='" + nombre + '\''
+                + ", modelo='" + modelo + '\''
+                + ", ano=" + ano
+                + ", cantidad=" + cantidad
+                + ", numeroFabrica='" + numeroFabrica + '\''
+                + ", precio=" + precio
+                + '}';
+    }
+
 }

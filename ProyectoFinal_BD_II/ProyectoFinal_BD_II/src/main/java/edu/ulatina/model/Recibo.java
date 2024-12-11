@@ -58,6 +58,11 @@ public class Recibo implements Serializable {
     public void setProductoCodigo(int productoCodigo) {
         this.productoCodigo = productoCodigo;
     }
+
+    @Override
+    public String toString() {
+        return "Recibo{" + "codigo=" + codigo + ", cantidad=" + cantidad + ", precioTotal=" + precioTotal + ", productoCodigo=" + productoCodigo + '}';
+    }
             
     
 }

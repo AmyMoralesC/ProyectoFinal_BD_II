@@ -28,7 +28,7 @@
 
                         <p:commandButton value="Agregar producto" onclick="PF('dlgAgregarProducto').show();" styleClass="btn-cuadro" />
 
-                        <p:dataTable id="tablaProductos" value="#{productosController.productos}" var="productos" editable="true"
+                        <p:dataTable id="tablaProductos" value="#{productosController.productos}" var="productos" editable="true" selectionMode="single"
                                      selection="#{ProductosController.selectedProducto}"  rowKey="#{producto.codigo}">
                             <p:column headerText="Código">
                                 <h:outputText value="#{productos.codigo}" />
@@ -53,7 +53,9 @@
                             </p:column>
                             <p:column headerText="Acción">
                                 <p:commandButton value="Editar" actionListener="#{productoBean.editarProducto(producto)}" title="Editar" styleClass="btn-editar"/>
-                                <p:commandButton value="Borrar" actionListener="#{productoBean.eliminarProducto(producto)}" update="tablaProductos" title="Borrar" styleClass="btn-borrar"/>
+                                <p:commandButton value="Borrar" actionListener="#{productosController.deleteProducto()}" update="@form" title="Borrar" styleClass="btn-borrar">
+                                    <f:setPropertyActionListener target="#{productosController.selectedProducto}" value="#{productos.codigo}" />
+                                </p:commandButton>
                             </p:column>
                         </p:dataTable>
                     </p:panel>
@@ -63,28 +65,28 @@
             <p:dialog header="Agregar Producto" widgetVar="dlgAgregarProducto" modal="true" width="400px" closable="true">
                 <h:panelGrid columns="2" cellpadding="5">
                     <h:outputLabel for="codigo" value="Código:" />
-                    <p:inputText id="codigo" value="#{productoBean.nuevoProducto.codigo}" required="true"/>
+                    <p:inputText id="codigo" value="#{productosController.producto.codigo}" required="true"/>
 
                     <h:outputLabel for="nombre" value="Nombre:" />
-                    <p:inputText id="nombre" value="#{productoBean.nuevoProducto.nombre}" required="true"/>
+                    <p:inputText id="nombre" value="#{productosController.producto.nombre}" required="true"/>
 
                     <h:outputLabel for="modelo" value="Modelo:" />
-                    <p:inputText id="modelo" value="#{productoBean.nuevoProducto.modelo}" required="true"/>
+                    <p:inputText id="modelo" value="#{productosController.producto.modelo}" required="true"/>
                     
-                    <h:outputLabel for="anio" value="Año:" />
-                    <p:inputText id="anio" value="#{productoBean.nuevoProducto.anio}" required="true"/>
+                    <h:outputLabel for="ano" value="Año:" />
+                    <p:inputText id="ano" value="#{productosController.producto.ano}" required="true"/>
                     
                     <h:outputLabel for="cantidad" value="Cantidad:" />
-                    <p:inputText id="cantidad" value="#{productoBean.nuevoProducto.cantidad}" required="true"/>
+                    <p:inputText id="cantidad" value="#{productosController.producto.cantidad}" required="true"/>
 
                     <h:outputLabel for="nomFab" value="Nombre de la fábrica:" />
-                    <p:inputText id="nomFab" value="#{productoBean.nuevoProducto.nomFab}" required="true"/>
+                    <p:inputText id="nomFab" value="#{productosController.producto.numeroFabrica}" required="true"/>
 
                     <h:outputLabel for="precio" value="Precio:" />
-                    <p:inputText id="precio" value="#{productoBean.nuevoProducto.precio}" required="true"/>
+                    <p:inputText id="precio" value="#{productosController.producto.precio}" required="true"/>
                 </h:panelGrid>
                 <f:facet name="footer">
-                    <p:commandButton value="Crear" actionListener="#{productoBean.crearProducto}" update="tablaProductos" oncomplete="PF('dlgAgregarProducto').hide();" styleClass="btn-cuadro"/>
+                    <p:commandButton value="Crear" actionListener="#{productosController.crearProducto}" update="tablaProductos" oncomplete="PF('dlgAgregarProducto').hide();" styleClass="btn-cuadro"/>
                     <p:commandButton value="Cancelar" onclick="PF('dlgAgregarProducto').hide();" styleClass="btn-borrar"/>
                 </f:facet>
             </p:dialog>

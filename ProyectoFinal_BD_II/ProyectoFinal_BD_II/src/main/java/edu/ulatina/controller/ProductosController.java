@@ -8,9 +8,11 @@ import edu.ulatina.data.ServicioProducto;
 import edu.ulatina.model.Producto;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -41,6 +43,37 @@ public class ProductosController implements Serializable {
         return productos;
     }
 
+    public void crearProducto() {
+        System.out.println("Datos del producto: " + producto);
+        boolean isInserted = servicioPro.crearProducto(this.getProducto());
+
+        if (isInserted) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    "Registro exitoso", "El producto ha sido añadido correctamente."));
+            producto = new Producto();
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Error en al añadir", "No se pudo añadir el producto. Inténtalo de nuevo."));
+        }
+
+    }
+
+    public void deleteProducto() {
+        System.out.println("Intentando eliminar el producto: " + selectedProducto); // Depuración
+        if (selectedProducto != null) {
+            boolean exito = servicioPro.eliminarProducto(selectedProducto.getCodigo());
+
+            if (exito) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Producto eliminado exitosamente"));
+                cargarProductos(); // Recargar la lista después de eliminar
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se pudo eliminar el producto"));
+            }
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Advertencia", "No hay producto seleccionado para eliminar"));
+        }
+    }
+
     public ServicioProducto getServicioPro() {
         return servicioPro;
     }
@@ -50,6 +83,9 @@ public class ProductosController implements Serializable {
     }
 
     public Producto getProducto() {
+        if (producto == null) {
+            producto = new Producto(); // Inicialización si es nulo
+        }
         return producto;
     }
 
@@ -58,6 +94,9 @@ public class ProductosController implements Serializable {
     }
 
     public Producto getSelectedProducto() {
+        if (selectedProducto == null) {
+            selectedProducto = new Producto(); // Inicialización si es nulo
+        }
         return selectedProducto;
     }
 

@@ -27,14 +27,14 @@ public class ServicioProducto extends Servicio {
 
         try {
             conectar();
-            String sql = "EXEC sp_InsertarProducto @codigo, @nombre, @modelo, @ano, @cantidad, @n_fabrica, @precio;";
+            String sql = "EXEC sp_InsertarProducto @codigo=?, @nombre=?, @modelo=?, @ano=?, @cantidad=?, @n_fabrica=?, @precio=?";
             stmt = getConexion().prepareStatement(sql);
             stmt.setInt(1, producto.getCodigo());
             stmt.setString(2, producto.getNombre());
             stmt.setString(3, producto.getModelo());
             stmt.setInt(4, producto.getAno());
             stmt.setInt(5, producto.getCantidad());
-            stmt.setInt(6, producto.getNumeroFabrica());
+            stmt.setString (6, producto.getNumeroFabrica());
             stmt.setInt(7, producto.getPrecio());
             int rows = stmt.executeUpdate();
             exito = (rows == 1);
@@ -65,7 +65,7 @@ public class ServicioProducto extends Servicio {
                 String modelo = rs.getString("modelo");
                 int ano = rs.getInt("ano");
                 int cantidad = rs.getInt("cantidad");
-                int numeroFa = rs.getInt("n_fabrica");
+                String numeroFa = rs.getString("n_fabrica");
                 int precio = rs.getInt("precio");
                 Producto producto = new Producto();
                 producto.setCodigo(codigo);
@@ -88,5 +88,33 @@ public class ServicioProducto extends Servicio {
 
         return listaProducto;
     }
+    
+    public boolean eliminarProducto(int codigo) {
+    boolean exito = false;
+    PreparedStatement stmt = null;
+
+    try {
+        conectar();
+        // Llamada al procedimiento almacenado para eliminar un producto por su código.
+        String sql = "EXEC sp_EliminarProducto @codigo=?";
+        stmt = getConexion().prepareStatement(sql);
+
+        // Asignamos el valor del código del producto al PreparedStatement.
+        stmt.setInt(1, codigo);
+
+        // Ejecutamos la consulta.
+        int rows = stmt.executeUpdate();
+        exito = (rows == 1);
+    } catch (SQLException | ClassNotFoundException e) {
+        e.printStackTrace();
+    } finally {
+        cerrarStatement(stmt);
+        desconectar();
+    }
+
+    return exito;
+}
+    
+    
 
 }

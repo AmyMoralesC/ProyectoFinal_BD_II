@@ -27,7 +27,7 @@ public class ServicioRecibo extends Servicio {
 
         try {
             conectar();
-            String sql = "EXEC sp_RegistrarRecibo @codigo, @cantidad, @precioTotal, @ProductoCodigo;;";
+            String sql = "EXEC sp_InsertarProducto @codigo=?, @cantidad=?, @precioTotal=?, @productoCodigo=?";
             stmt = getConexion().prepareStatement(sql);
             stmt.setInt(1, recibo.getCodigo());
             stmt.setInt(2, recibo.getCantidad());
@@ -82,4 +82,30 @@ public class ServicioRecibo extends Servicio {
 
         return listaRecibo;
     }
+    
+    public boolean eliminarRecibo(int codigo) {
+    boolean exito = false;
+    PreparedStatement stmt = null;
+
+    try {
+        conectar();
+        // Llamada al procedimiento almacenado para eliminar un producto por su código.
+        String sql = "EXEC sp_EliminarRecibo @codigo=?";
+        stmt = getConexion().prepareStatement(sql);
+
+        // Asignamos el valor del código del producto al PreparedStatement.
+        stmt.setInt(1, codigo);
+
+        // Ejecutamos la consulta.
+        int rows = stmt.executeUpdate();
+        exito = (rows == 1);
+    } catch (SQLException | ClassNotFoundException e) {
+        e.printStackTrace();
+    } finally {
+        cerrarStatement(stmt);
+        desconectar();
+    }
+
+    return exito;
+}
 }
