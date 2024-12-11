@@ -7,6 +7,7 @@ package edu.ulatina.controller;
 import edu.ulatina.data.ServicioProducto;
 import edu.ulatina.model.Producto;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -32,6 +33,9 @@ public class ProductosController implements Serializable {
     public void cargarProductos() {
         if (servicioPro != null) {
             productos = servicioPro.buscarTodosLosProductos();
+            if (productos == null) {
+            productos = new ArrayList<>(); // Evita que sea nulo
+        }
         }
     }
 
@@ -51,6 +55,7 @@ public class ProductosController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                     "Registro exitoso", "El producto ha sido añadido correctamente."));
             producto = new Producto();
+            cargarProductos();
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Error en al añadir", "No se pudo añadir el producto. Inténtalo de nuevo."));
@@ -71,6 +76,21 @@ public class ProductosController implements Serializable {
             }
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Advertencia", "No hay producto seleccionado para eliminar"));
+        }
+    }
+
+    public void editarProducto() {
+        if (selectedProducto != null) {
+            boolean exito = servicioPro.editarProducto(selectedProducto);
+
+            if (exito) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Producto editado exitosamente"));
+                cargarProductos(); // Recargar la lista para reflejar los cambios
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se pudo editar el producto"));
+            }
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Advertencia", "No hay producto seleccionado para editar"));
         }
     }
 

@@ -34,7 +34,7 @@ public class ServicioProducto extends Servicio {
             stmt.setString(3, producto.getModelo());
             stmt.setInt(4, producto.getAno());
             stmt.setInt(5, producto.getCantidad());
-            stmt.setString (6, producto.getNumeroFabrica());
+            stmt.setString(6, producto.getNumeroFabrica());
             stmt.setInt(7, producto.getPrecio());
             int rows = stmt.executeUpdate();
             exito = (rows == 1);
@@ -75,7 +75,7 @@ public class ServicioProducto extends Servicio {
                 producto.setCantidad(cantidad);
                 producto.setNumeroFabrica(numeroFa);
                 producto.setPrecio(precio);
-                
+
                 listaProducto.add(producto);
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -88,33 +88,59 @@ public class ServicioProducto extends Servicio {
 
         return listaProducto;
     }
-    
+
     public boolean eliminarProducto(int codigo) {
-    boolean exito = false;
-    PreparedStatement stmt = null;
+        boolean exito = false;
+        PreparedStatement stmt = null;
 
-    try {
-        conectar();
-        // Llamada al procedimiento almacenado para eliminar un producto por su código.
-        String sql = "EXEC sp_EliminarProducto @codigo=?";
-        stmt = getConexion().prepareStatement(sql);
+        try {
+            conectar();
+            // Llamada al procedimiento almacenado para eliminar un producto por su código.
+            String sql = "EXEC sp_EliminarProducto @codigo=?";
+            stmt = getConexion().prepareStatement(sql);
 
-        // Asignamos el valor del código del producto al PreparedStatement.
-        stmt.setInt(1, codigo);
+            // Asignamos el valor del código del producto al PreparedStatement.
+            stmt.setInt(1, codigo);
 
-        // Ejecutamos la consulta.
-        int rows = stmt.executeUpdate();
-        exito = (rows == 1);
-    } catch (SQLException | ClassNotFoundException e) {
-        e.printStackTrace();
-    } finally {
-        cerrarStatement(stmt);
-        desconectar();
+            // Ejecutamos la consulta.
+            int rows = stmt.executeUpdate();
+            exito = (rows == 1);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            cerrarStatement(stmt);
+            desconectar();
+        }
+
+        return exito;
     }
 
-    return exito;
-}
-    
-    
+    public boolean editarProducto(Producto producto) {
+        boolean exito = false;
+        PreparedStatement stmt = null;
+
+        try {
+            conectar();
+            String sql = "UPDATE Productos SET nombre = ?, modelo = ?, ano = ?, cantidad = ?, n_fabrica = ?, precio = ? WHERE codigo = ?";
+            stmt = getConexion().prepareStatement(sql);
+            stmt.setString(1, producto.getNombre());
+            stmt.setString(2, producto.getModelo());
+            stmt.setInt(3, producto.getAno());
+            stmt.setInt(4, producto.getCantidad());
+            stmt.setString(5, producto.getNumeroFabrica());
+            stmt.setInt(6, producto.getPrecio());
+            stmt.setInt(7, producto.getCodigo());
+
+            int rows = stmt.executeUpdate();
+            exito = (rows > 0);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            cerrarStatement(stmt);
+            desconectar();
+        }
+
+        return exito;
+    }
 
 }

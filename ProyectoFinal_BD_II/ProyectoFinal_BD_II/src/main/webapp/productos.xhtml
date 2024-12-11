@@ -29,7 +29,7 @@
                         <p:commandButton value="Agregar producto" onclick="PF('dlgAgregarProducto').show();" styleClass="btn-cuadro" />
 
                         <p:dataTable id="tablaProductos" value="#{productosController.productos}" var="productos" editable="true" selectionMode="single"
-                                     selection="#{ProductosController.selectedProducto}"  rowKey="#{producto.codigo}">
+                                       rowKey="#{productos.codigo}">
                             <p:column headerText="Código">
                                 <h:outputText value="#{productos.codigo}" />
                             </p:column>
